@@ -31,7 +31,6 @@ class MusicComment extends Boot
     /**
      * Create a new command instance.
      *
-     * @return void
      */
     public function __construct()
     {
@@ -56,6 +55,9 @@ class MusicComment extends Boot
         $this->end();
     }
 
+    /**
+     * mutix
+     */
     public function mutix()
     {
         $userId = $this->argument('user_id');
@@ -79,6 +81,10 @@ class MusicComment extends Boot
 
     }
 
+    /**
+     * @param $musicId
+     * @param $count
+     */
     private function crawerMusicComment($musicId, $count)
     {
         $userId = $this->argument('user_id');

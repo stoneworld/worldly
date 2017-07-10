@@ -29,10 +29,10 @@ class MusicPlayList extends Boot
     protected $description = 'netease playlist crawer';
 
     const MUSIC_URL = 'http://music.163.com/#/song?id=';
+
     /**
      * Create a new command instance.
      *
-     * @return void
      */
     public function __construct()
     {
@@ -61,9 +61,12 @@ class MusicPlayList extends Boot
 
     /**
      * [getUserCreatePlayLists description]
-     * @param  [type] $result [description]
-     * @param  [type] $userId [description]
-     * @return [type]         [description]
+     * @param $result
+     * @param $userId
+     * @return array [type]         [description]
+     * @throws \Exception
+     * @internal param $ [type] $result [description]
+     * @internal param $ [type] $userId [description]
      */
     private function getUserCreatePlayLists($result, $userId)
     {
@@ -81,9 +84,10 @@ class MusicPlayList extends Boot
 
     /**
      * [insertUserPlayLists description]
-     * @param  [type] $userPlaylists [description]
-     * @param  [type] $userId        [description]
-     * @return [type]                [description]
+     * @param $userPlaylists
+     * @param $userId
+     * @internal param $ [type] $userPlaylists [description]
+     * @internal param $ [type] $userId        [description]
      */
     private function insertUserPlayLists($userPlaylists, $userId)
     {
@@ -101,8 +105,8 @@ class MusicPlayList extends Boot
 
     /**
      * [crawerUserMusic description]
-     * @param  [type] $userId [description]
-     * @return [type]         [description]
+     * @param $userId
+     * @internal param $ [type] $userId [description]
      */
     private function crawerUserMusic($userId)
     {
