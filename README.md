@@ -2,15 +2,15 @@
 #### 项目 clone
 
 ```
-git clone https://github.com/stoneworld/NeteaseCloudMusic
-cd viease
+git clone https://github.com/stoneworld/NeteaseCloudMusic.git
+cd NeteaseCloudMusic
 composer install -v
 chmod -R 777 storage
 chmod -R 777 bootstrap/cache
 ```
 
 #### 创建.env
-`cp .env.example .env && composer install && php artisan key:generate`
+`cp .env.example .env && php artisan key:generate`
 
 #### 创建数据库
 `php artisan migrate`
