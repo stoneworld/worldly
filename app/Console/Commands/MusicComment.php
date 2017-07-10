@@ -47,7 +47,6 @@ class MusicComment extends Boot
     {
         $this->start();
         if ($this->option('mutix')) {
-            Log::info(124444);
             $this->mutix();
         } else {
             $this->grap();
@@ -62,7 +61,7 @@ class MusicComment extends Boot
     {
         $userId = $this->argument('user_id');
         $count = UserMusic::where('user_id', $userId)->count();
-        $this->scryed($count,40,['artisan','netease:comment', $userId]);
+        $this->scryed($count,50,[base_path() .'/artisan','netease:comment', $userId]);
     }
 
     public function grap()
@@ -74,7 +73,7 @@ class MusicComment extends Boot
         if ($userMusic->count()) {
             foreach ($userMusic as $key => $music) {
                 $commentCount = Netease::songComment($music->music_id, 0)['total']; // 获取歌曲总评论数量
-                $this->info('歌曲评论总数是'. $commentCount);
+                $this->info('music comment count'. $commentCount);
                 $this->crawerMusicComment($music->music_id, $commentCount);
             }
         }

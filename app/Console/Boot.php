@@ -108,13 +108,8 @@ class Boot extends Command{
                     echo "fork error : {$i} \r\n";
                     exit;
                 case 0:
-                    $limit = floor($total / $workers);
+                    $limit = (int)ceil($total / $workers);
                     $offset = $i * $limit;
-
-                    if($i == $workers-1) {
-                        $limit = $total - $offset;
-                    }
-
                     $this->info(">>> 一个子进程已开启  |   剩 " . ($workers-$i-1) ." 个  |  pid = " . getmypid() . " | --limit = $limit  |  --offset = $offset");
                     sleep(2); // 这个sleep仅为看清上面的info，可删
 
