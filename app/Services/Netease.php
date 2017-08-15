@@ -147,7 +147,8 @@ class Netease
                 "n":"1000",
                 "csrf_token":""
             }'];
-        return $this->curl($url, $this->prepare($data));
+        $result = $this->curl($url, $this->prepare($data));
+        return json_decode($result, true);
     }
 
     /**
@@ -165,7 +166,7 @@ class Netease
                 "csrf_token":""
             }'];
         $response = $this->curl($url, $this->prepare($data));
-        return $response;
+        return json_decode($response, true)['playlist'];
     }
 
     public function songComment($musicId,$offset)

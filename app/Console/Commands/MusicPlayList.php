@@ -70,8 +70,7 @@ class MusicPlayList extends Boot
      */
     private function getUserCreatePlayLists($result, $userId)
     {
-        $playlists = json_decode($result, true)['playlist'];
-
+        $playlists = $result;
         if (!count($playlists)) {
             throw new \Exception("the user dont have any playlist", 1);
         }
@@ -113,7 +112,7 @@ class MusicPlayList extends Boot
         $userPlayLists = UserPlaylist::where('user_id', $userId)->get()->pluck('playlist_id');
         $music = [];
         foreach ($userPlayLists as $key => $playlist) {
-            $tracks = json_decode(Netease::playListInfo($playlist), true)['playlist']['tracks'];
+            $tracks = Netease::playListInfo($playlist)['playlist']['tracks'];
             $music[] = $tracks;
         }
         $music = collect($music)->collapse()->unique('id')->transform(function ($item) use ($userId) {
