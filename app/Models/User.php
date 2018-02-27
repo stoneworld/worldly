@@ -17,6 +17,5 @@ class User extends Model
     	$user->user_id = $userId;
     	$user->save();
     	return true;
-
     }
 }

@@ -50,6 +50,7 @@ class MusicPlayList extends Boot
         $userId = $this->argument('user_id');
         $result = Netease::userPlaylists($userId); // 获取用户的歌单列表
         $userPlaylists = $this->getUserCreatePlayLists($result, $userId); // 处理歌单列表
+        Log::info($userPlaylists);
         $this->insertUserPlayLists($userPlaylists, $userId); // 插入到数据库
         $this->crawerUserMusic($userId); // 爬取用户歌单中的所有歌曲并入库
         // 多进程爬取评论入库

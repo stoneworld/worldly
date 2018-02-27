@@ -12,11 +12,12 @@ class Netease
 
     protected $headers = ['Accept: */*', 'Accept-Encoding: gzip,deflate,sdch', 'Accept-Language: zh-CN,zh;q=0.8,gl;q=0.6,zh-TW;q=0.4', 'Connection: keep-alive', 'Content-Type: application/x-www-form-urlencoded', 'Host: music.163.com', 'Referer: http://music.163.com/search/', 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.152 Safari/537.36'];
     protected $secretKey;
-
+    protected $curl;
 
     public function __construct()
     {
         $this->secretKey = $this->createSecretKey(16);
+        $this->curl = new ProxyCurl();
     }
 
     protected function createSecretKey($length)
@@ -114,7 +115,7 @@ class Netease
               "offset":"' . $offset . '",
               "csrf_token": ""
           }'];
-        return $this->curl($url, $this->prepare($data));
+        return $this->curl->retryCurl($url, $this->prepare($data));
     }
 
     /**
@@ -130,7 +131,7 @@ class Netease
                 "ids":' . $s . ',
                 "csrf_token":""
             }'];
-        return $this->curl($url, $this->prepare($data));
+        return $this->curl->retryCurl($url, $this->prepare($data));
     }
 
 
@@ -147,7 +148,7 @@ class Netease
                 "n":"1000",
                 "csrf_token":""
             }'];
-        $result = $this->curl($url, $this->prepare($data));
+        $result = $this->curl->retryCurl($url, $this->prepare($data));
         return json_decode($result, true);
     }
 
@@ -165,7 +166,7 @@ class Netease
                 "limit":"100",
                 "csrf_token":""
             }'];
-        $response = $this->curl($url, $this->prepare($data));
+        $response = $this->curl->retryCurl($url, $this->prepare($data));
         return json_decode($response, true)['playlist'];
     }
 
@@ -178,7 +179,7 @@ class Netease
                 "total": true,
                 "csrf_token":""
             }'];
-        $response = $this->curl($url, $this->prepare($data));
+        $response = $this->curl->retryCurl($url, $this->prepare($data));
         $comments = json_decode($response, true);
         return $comments;
     }

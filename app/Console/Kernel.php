@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         \App\Console\Commands\MusicPlayList::class,
         \App\Console\Commands\MusicComment::class,
+        \App\Console\Commands\getFreeProxy::class,
     ];
 
     /**
