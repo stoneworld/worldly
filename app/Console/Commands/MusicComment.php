@@ -68,7 +68,8 @@ class MusicComment extends Boot
     {
         $offset = $this->option('offset') ? : 0;
         $limit = $this->option('limit') ? : 0;
-        $query = UserMusic::where('user_id', $this->argument('user_id'));
+        $query = UserMusic::where('user_id', $this->argument('user_id'))
+                            ->where('status', 0);
         $userMusic = $query->skip($offset)->take($limit)->get();
         if ($userMusic->count()) {
             foreach ($userMusic as $key => $music) {
@@ -109,6 +110,9 @@ class MusicComment extends Boot
                 $userComments[] = $filter;
             }
         }
+        $music = UserMusic::where("user_id", $userId)->where("music_id", $musicId)->first();
+        $music->status = 1;
+        $music->save();
         UserComment::addOrUpdate($userComments, $userId);
     }
 }

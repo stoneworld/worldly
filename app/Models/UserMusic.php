@@ -9,7 +9,7 @@ class UserMusic extends Model
     protected $fillable = ['*'];
 
     protected $table = 'user_music';
-
+    public $timestamps = false;
     public static function addOrUpdate($userId, $music)
     {
     	$userExistMusic = self::where('user_id', $userId)->get()->pluck('music_id')->toArray();
