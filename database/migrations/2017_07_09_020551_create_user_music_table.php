@@ -20,6 +20,7 @@ class CreateUserMusicTable extends Migration
             $table->string('music_name')->nullable()->comment('歌曲名称')->index();
             $table->string('singer')->nullable()->comment('歌手姓名');
             $table->string('music_url')->nullable()->comment('歌曲URL');
+            $table->tinyInteger('status')->default(0)->comment('状态');
         });
     }
 
