@@ -45,7 +45,7 @@ class getFreeProxy extends Command
     {
         $url = 'http://www.ip181.com/';
         $content = file_get_contents($url);
-        $content = iconv('gb2312', 'utf-8', $content);
+        $content = iconv('gbk', 'utf-8', $content);
         $pattern = "/<tr.*>(.*)<\/tr>/iUs";
         preg_match_all($pattern, $content, $matches);
         $pattern1 = "/<td>(.*)<\/td>/";
