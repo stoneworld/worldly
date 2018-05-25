@@ -18,7 +18,7 @@ class CreateUserPlaylistsTable extends Migration
             $table->string('name')->comment('歌单名称');
             $table->string('description')->nullable()->comment('歌单描述');
             $table->integer('user_id')->comment('所属用户ID')->index();
-            $table->integer('playlist_id')->comment('歌单ID')->unique();
+            $table->bigInteger('playlist_id')->comment('歌单ID')->unique();
         });
     }
 
