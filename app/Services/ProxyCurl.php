@@ -63,8 +63,11 @@ class ProxyCurl
     public function getProxyIp()
     {
         $ips = DB::table('proxy_ips')->get()->toArray();
-        $key = array_rand($ips, 1);
-        $ip = $ips[$key]->ip . ':' . $ips[$key]->port;
-        return $ip;
+        if (!empty($ips) {
+            $key = array_rand($ips, 1);
+            $ip = $ips[$key]->ip . ':' . $ips[$key]->port;
+            return $ip;
+        }
+        return '';
     }
 } 
