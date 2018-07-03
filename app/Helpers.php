@@ -34,7 +34,10 @@ function getSinaShortUrl($url_long, $showHttp = false)
     if ($error = curl_errno($ch)) {
         return false;
     }
+
+
     curl_close($ch);
+
 
     $result = json_decode($data, true);
     if (!$showHttp) {
