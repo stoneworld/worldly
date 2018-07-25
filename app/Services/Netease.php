@@ -183,4 +183,9 @@ class Netease
         $comments = json_decode($response, true);
         return $comments;
     }
+
+    public function songHistory()
+    {
+
+    }
 }
