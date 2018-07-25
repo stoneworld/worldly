@@ -45,4 +45,3 @@ function getSinaShortUrl($url_long, $showHttp = false)
     return $result;
 }
 
-?>
