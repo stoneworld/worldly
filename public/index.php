@@ -1,7 +1,4 @@
 <?php
-//echo phpinfo();
-$sphinx = new SphinxClient;
-var_dump($sphinx);exit();
 /**
  * Laravel - A PHP Framework For Web Artisans
  *

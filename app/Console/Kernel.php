@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
         \App\Console\Commands\MusicPlayList::class,
         \App\Console\Commands\MusicComment::class,
         \App\Console\Commands\getFreeProxy::class,
+        \App\Console\Commands\Zsxq::class,
     ];
 
     /**
