@@ -113,14 +113,14 @@ class MusicPlayList extends Boot
         $userPlayLists = UserPlaylist::where('user_id', $userId)->get()->pluck('playlist_id');
         $music = [];
         foreach ($userPlayLists as $key => $playlist) {
-            $tracks = Netease::playListInfo($playlist)['playlist']['tracks'];
+            $tracks = Netease::playListInfo($playlist)['result']['tracks'];
             $music[] = $tracks;
         }
         $music = collect($music)->collapse()->unique('id')->transform(function ($item) use ($userId) {
             $list['music_id']   = $item['id'];
             $list['user_id']    = $userId;
             $list['music_name'] = $item['name'];
-            $list['singer']     = $item['ar'][0]['name'];
+            $list['singer']     = $item['artists'][0]['name'];
             $list['music_url']  = self::MUSIC_URL . $item['id'];
             return $list;
         })->values()->all();

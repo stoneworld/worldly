@@ -142,13 +142,17 @@ class Netease
      */
     public function playListInfo($playListId)
     {
-        $url = 'http://music.163.com/weapi/v3/playlist/detail?csrf_token=';
+        /*$url = 'http://music.163.com/weapi/v3/playlist/detail?csrf_token=';
         $data = ['params' => '{
                 "id":"' . $playListId . '",
                 "n":"1000",
                 "csrf_token":""
             }'];
         $result = $this->curl->retryCurl($url, $this->prepare($data));
+        return json_decode($result, true);*/
+        $url = 'http://music.163.com/api/playlist/detail?id='.$playListId;
+        $result = $this->cget($url);
+        \Log::info($result);
         return json_decode($result, true);
     }
 
@@ -184,8 +188,29 @@ class Netease
         return $comments;
     }
 
-    public function songHistory()
+    public function cget($url, $isHttps=false, $timeout = 5)
     {
 
+        $curl = curl_init();
+
+        if (defined('CURLOPT_IPRESOLVE') && defined('CURL_IPRESOLVE_V4')){
+            curl_setopt($curl, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+        }
+        curl_setopt ( $curl, CURLOPT_CONNECTTIMEOUT,$timeout);
+        curl_setopt ( $curl, CURLOPT_TIMEOUT, $timeout);
+
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_HEADER, false);
+
+        if ($isHttps)
+        {
+            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER,FALSE);
+            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST,FALSE);
+        }
+
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        $result = curl_exec($curl);
+        curl_close($curl);
+        return $result;
     }
 }
