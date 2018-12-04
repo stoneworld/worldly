@@ -37,7 +37,7 @@ class Zsxq
     public function getPublicTopicsByGroupId($groupId)
     {
         $uri = '/v1.10/groups/'.$groupId.'/public_topics';
-        return $this->requestGet($uri);
+        return $this->requestGet($uri, true);
     }
 
 
@@ -69,11 +69,11 @@ class Zsxq
         if ($withHeader) {
             $header = [
                 'headers' => [
-                    'User-Agent' => 'xiaomiquan/3.15.1 iOS/phone/12.1.1',
+                    'User-Agent' => 'xiaomiquan/3.18.0 iOS/phone/12.1.1',
                     'Host'     => 'api.zsxq.com',
-                    'Authorization'  => '9338191B-A195-21E8-60DA-9FF5706A6CB4',
-                    'X-Request-Id'  => '3a800375-45bb-4573-8fe9-dec67fea20d6',
-                    'X-Version'  => '1.10.8',
+                    'Authorization'  => 'CB1D1B6F-479A-844D-4C82-8FBF641636E3',
+                    'X-Request-Id'  => '21fa0fbd-fbfb-4eea-a1e2-ed0d6850bfb5',
+                    'X-Version'  => '1.10.10',
                 ]
             ];
         }

@@ -37,7 +37,7 @@ class Zsxq extends Command
     }
 
     public $groupIds = [
-        '',
+        '454884421458',
     ];
 
     /**
@@ -62,7 +62,7 @@ class Zsxq extends Command
                 }
                 $this->getPublicTopicByGroupId($groupId, $group);
             }
-            sleep(5);
+            sleep(100);
             echo "{$time}次成功完成拉取\n";
             $time++;
         }
