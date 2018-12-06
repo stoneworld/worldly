@@ -37,7 +37,7 @@ class Zsxq extends Command
     }
 
     public $groupIds = [
-        '454884421458',
+        '',
     ];
 
     /**
@@ -72,7 +72,7 @@ class Zsxq extends Command
     {
         $groupInfo = $this->zsxq->getGroupPublicInfo($groupId);
         if ($groupInfo['succeeded'] == false) {
-            ding()->at(["18301276180"],false)->text('登录失效!');
+            ding()->at([""],false)->text('登录失效!');
             throw new \Exception('获取信息失败');
         }
         $groupInfo = $groupInfo['resp_data']['public_info'];
@@ -92,7 +92,7 @@ class Zsxq extends Command
     {
         $responseData = $this->zsxq->getPublicTopicsByGroupId($groupId);
         if ($responseData['succeeded'] == false) {
-            ding()->at(["18301276180"],false)->text('抓取失败，赶紧看日志去吧!');
+            ding()->at([""],false)->text('抓取失败，赶紧看日志去吧!');
             Log::notice($responseData);
             throw new \Exception('获取信息失败');
         }
