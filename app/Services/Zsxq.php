@@ -29,7 +29,6 @@ class Zsxq
 
     /**
      * 根据圈子id获取预览的消息内容
-     * @author wangshuai15@100tal.com
      * @param $groupId
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
@@ -43,7 +42,6 @@ class Zsxq
 
     /**
      * 获取圈子的基本信息
-     * @author wangshuai15@100tal.com
      * @param $groupId
      * @return mixed
      * @throws \GuzzleHttp\Exception\GuzzleException
@@ -57,7 +55,6 @@ class Zsxq
 
     /**
      * get请求
-     * @author wangshuai15@100tal.com
      * @param $uri
      * @param bool $withHeader
      * @return mixed
