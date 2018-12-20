@@ -133,7 +133,7 @@ class Zsxq extends Command
                 foreach ($images as $image) {
                     $imageList[] = $image['thumbnail']['url'];
                 }
-                $data['images'] = json_encode($imageList, true);
+                $data['images'] = !empty($imageList)?json_encode($imageList, true):null;
             }
             $data['answer_text'] = isset($publicTopic['answer'])?$publicTopic['answer']['text']:'';
             $data['answer_user_id'] = isset($publicTopic['answer'])?$publicTopic['answer']['owner']['user_id']:0;

@@ -20,6 +20,7 @@ class CreateXiaomiquanTopicsTable extends Migration
             $table->string('from_user_name')->default('')->comment('提出话题人姓名');
             $table->string('type')->default('q&a')->comment('类型');
             $table->text('desc', 255)->default('')->comment('问题标题或者topic_title');
+            $table->json('images', 255)->nullable()->comment('相关图片');
             $table->text('answer_text', 255)->default('')->comment('答案');
             $table->unsignedBigInteger('answer_user_id')->default(0)->comment('回答人id');
             $table->string('answer_user_name')->default('')->comment('回答人名称');
