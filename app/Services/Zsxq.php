@@ -69,10 +69,10 @@ class Zsxq
         if ($withHeader) {
             $header = [
                 'headers' => [
-                    'User-Agent' => 'xiaomiquan/3.18.0 iOS/phone/12.1.1',
+                    'User-Agent' => 'xiaomiquan/3.18.1 iOS/phone/12.1.2',
                     'Host'     => 'api.zsxq.com',
-                    'Authorization'  => 'CB1D1B6F-479A-844D-4C82-8FBF641636E3',
-                    'X-Request-Id'  => '21fa0fbd-fbfb-4eea-a1e2-ed0d6850bfb5',
+                    'Authorization'  => '1EF1501B-9FCF-7238-6AB9-C76118CA9861',
+                    'X-Request-Id'  => 'cd120f11-2812-4d71-a19c-5d3cd08c32f2',
                     'X-Version'  => '1.10.10',
                 ]
             ];

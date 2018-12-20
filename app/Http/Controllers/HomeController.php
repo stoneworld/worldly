@@ -13,7 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -23,6 +23,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $producer = new andZone\Kafka\MessageProducer(new andZone\Kafka\Conf(1), ['server' => '127.0.0.1', 'log_level' =>LOG_DEBUG]);
+        dd($producer);
         return view('home');
     }
 }

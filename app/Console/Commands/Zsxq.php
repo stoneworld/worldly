@@ -38,6 +38,7 @@ class Zsxq extends Command
 
     public $groupIds = [
         '454884421458',
+        '552522111144'
     ];
 
     /**
@@ -94,6 +95,7 @@ class Zsxq extends Command
         if ($responseData['succeeded'] == false) {
             ding()->at(["18301276180"],false)->text('抓取失败，赶紧看日志去吧!');
             Log::notice($responseData);
+            exit;
             throw new \Exception('获取信息失败');
         }
         $publicTopics = $responseData['resp_data']['public_topics'];
@@ -121,8 +123,13 @@ class Zsxq extends Command
             $data['likes_count'] = $publicTopic['likes_count'];
             $data['create_time'] = $publicTopic['create_time'];
             $data['desc'] = isset($publicTopic['talk']['text'])?$publicTopic['talk']['text']:$publicTopic['question']['text'];
-            $data['from_user_name'] = isset($publicTopic['talk']['owner']['name'])?$publicTopic['talk']['owner']['name']:$publicTopic['question']['owner']['name'];
-            $data['from_user_id'] = isset($publicTopic['talk']['owner']['user_id'])?$publicTopic['talk']['owner']['user_id']:$publicTopic['question']['owner']['user_id'];
+            if ($type == Topic::TYPE_QA && $publicTopic['question']['anonymous']) {
+                $data['from_user_name'] = '匿名用户';
+                $data['from_user_id'] = 0;
+            }else {
+                $data['from_user_name'] = isset($publicTopic['talk']['owner']['name'])?$publicTopic['talk']['owner']['name']:$publicTopic['question']['owner']['name'];
+                $data['from_user_id'] = isset($publicTopic['talk']['owner']['user_id'])?$publicTopic['talk']['owner']['user_id']:$publicTopic['question']['owner']['user_id'];
+            }
             $data['answer_text'] = isset($publicTopic['answer'])?$publicTopic['answer']['text']:'';
             $data['answer_user_id'] = isset($publicTopic['answer'])?$publicTopic['answer']['owner']['user_id']:0;
             $data['answer_user_name'] = isset($publicTopic['answer'])?$publicTopic['answer']['owner']['name']:'';
@@ -151,6 +158,7 @@ class Zsxq extends Command
     private function ding($topicId, $type,$group)
     {
         $topic = Topic::find($topicId);
+        if ($group['id'] == '552522111144') $group['name'] = '数字货币价值投资1';
         $markdown = '#### 圈子名称：'.$group['name']. "\n";
         $markdown .= "> 类型：{$topic['type']}\n\n";
         if ($type == Topic::TYPE_QA) {
