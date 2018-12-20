@@ -128,6 +128,12 @@ class Zsxq extends Command
             }else {
                 $data['from_user_name'] = isset($publicTopic['talk']['owner']['name'])?$publicTopic['talk']['owner']['name']:$publicTopic['question']['owner']['name'];
                 $data['from_user_id'] = isset($publicTopic['talk']['owner']['user_id'])?$publicTopic['talk']['owner']['user_id']:$publicTopic['question']['owner']['user_id'];
+                $images = isset($publicTopic['talk']['images'])?$publicTopic['talk']['images']:[];
+                $imageList = [];
+                foreach ($images as $image) {
+                    $imageList[] = $image['thumbnail']['url'];
+                }
+                $data['images'] = json_encode($imageList, true);
             }
             $data['answer_text'] = isset($publicTopic['answer'])?$publicTopic['answer']['text']:'';
             $data['answer_user_id'] = isset($publicTopic['answer'])?$publicTopic['answer']['owner']['user_id']:0;
@@ -166,6 +172,12 @@ class Zsxq extends Command
             $markdown .= "> 答案：{$topic['answer_text']}\n\n";
         } else {
             $markdown .= "> 描述：{$topic['from_user_name']} ： {$topic['desc']}, create_time : {$topic['create_time']}\n\n";
+            if (!empty($topic['images'])) {
+                $images = json_decode($topic['images'], true);
+                foreach ($images as $image) {
+                    $markdown .= "> 图片：![相关图片]({$image})\n\n";
+                }
+            }
         }
         ding()->markdown($group['name'],$markdown);
     }
