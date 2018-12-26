@@ -1,6 +1,6 @@
 项目说明
 #### 项目 clone
-
+> 接口有没有变更 不太清楚 有问题自行处理
 ```
 git clone https://github.com/stoneworld/NeteaseCloudMusic.git
 cd NeteaseCloudMusic
