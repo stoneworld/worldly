@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Xiaomiquan\Group;
 use App\Models\Xiaomiquan\Reply;
 use App\Models\Xiaomiquan\Topic;
+use App\Services\Fanfou;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
 
@@ -48,24 +49,8 @@ class Zsxq extends Command
      */
     public function handle()
     {
-        $time = 0;
-        while (true) {
-            foreach ($this->groupIds as $groupId) {
-                $group = Group::find($groupId);
-                if (!empty($groupInfo)) {
-                    try {
-                        $group = $this->addNewGroup($groupId);
-                    } catch (\Exception $exception) {
-                        Log::error($exception->getMessage());
-                        $group = null;
-                    }
-                }
-                $this->getPublicTopicByGroupId($groupId, $group);
-            }
-            sleep(100);
-            echo "{$time}次成功完成拉取\n";
-            $time++;
-        }
+        $this->crawlZsxq();
+        $this->crawFanfou();
     }
 
     private function addNewGroup($groupId)
@@ -180,5 +165,40 @@ class Zsxq extends Command
             }
         }
         ding()->markdown($group['name'],$markdown);
+    }
+
+    private function crawlZsxq()
+    {
+        $time = 0;
+        while (true) {
+            foreach ($this->groupIds as $groupId) {
+                $group = Group::find($groupId);
+                if (!empty($groupInfo)) {
+                    try {
+                        $group = $this->addNewGroup($groupId);
+                    } catch (\Exception $exception) {
+                        Log::error($exception->getMessage());
+                        $group = null;
+                    }
+                }
+                $this->getPublicTopicByGroupId($groupId, $group);
+            }
+            sleep(100);
+            echo "{$time}次成功完成拉取\n";
+            $time++;
+        }
+    }
+
+    private function crawFanfou()
+    {
+        $fanfaou = new Fanfou();
+        while (true) {
+            $result = $fanfaou->register();
+            if ($result != '本站暂停注册。') {
+                ding()->at([""],false)->text('知否知否！应是绿肥红瘦！！');
+                ding()->at([""],false)->text('知否知否！应是绿肥红瘦！！');
+            }
+
+        }
     }
 }

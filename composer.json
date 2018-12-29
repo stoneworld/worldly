@@ -14,7 +14,8 @@
         "laravel/tinker": "~1.0",
         "fideloper/proxy": "^4.0",
         "predis/predis": "^1.1",
-        "wangju/ding-notice": "^1.0"
+        "wangju/ding-notice": "^1.0",
+        "ext-curl": "*"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
